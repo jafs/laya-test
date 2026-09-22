@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laya playground</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --border: #d9dde3; --text: #1c2129; --muted: #667085;
+    --accent: #2f6df6; --ok: #1a9c5b; --bad: #d43f3f; --warn: #d98a00; --mono: ui-monospace, "JetBrains Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #14171c; --panel: #1d2128; --border: #333a45; --text: #e6e9ef; --muted: #9aa3b2; --accent: #6b9cff; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 system-ui, sans-serif; }
+  header { display: flex; align-items: center; gap: 16px; padding: 10px 20px; border-bottom: 1px solid var(--border); background: var(--panel); }
+  header h1 { font-size: 17px; margin: 0; }
+  #status { font-size: 13px; color: var(--muted); }
+  #status.ok { color: var(--ok); } #status.bad { color: var(--bad); } #status.warn { color: var(--warn); }
+  main { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px; height: calc(100vh - 52px); }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; height: auto; } }
+  section { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 14px; display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  h2 { font-size: 14px; margin: 0; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  label { font-size: 13px; color: var(--muted); }
+  textarea { width: 100%; font: 13px/1.4 var(--mono); background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 8px; resize: vertical; }
+  #state { min-height: 160px; }
+  #questions { flex: 1; min-height: 360px; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  button { background: var(--accent); color: #fff; border: 0; border-radius: 6px; padding: 8px 16px; font-size: 14px; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: default; }
+  button.secondary { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+  select { background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 6px; }
+  #results { flex: 1; overflow: auto; display: flex; flex-direction: column; gap: 10px; }
+  .card { border: 1px solid var(--border); border-radius: 6px; padding: 10px; }
+  .card .title { display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 6px; }
+  .card .type { font-size: 11px; color: var(--muted); font-weight: 400; }
+  .verdict { font-size: 18px; font-weight: 700; }
+  .bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin: 3px 0 6px; }
+  .bar > i { display: block; height: 100%; background: var(--accent); }
+  .prob { display: flex; justify-content: space-between; font-size: 13px; }
+  .prob span:last-child { font-family: var(--mono); }
+  .meta { font-size: 12px; color: var(--muted); }
+  .error { color: var(--bad); font-family: var(--mono); font-size: 13px; white-space: pre-wrap; }
+  details { font-size: 12px; } pre { margin: 6px 0 0; font: 12px var(--mono); overflow: auto; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Laya playground</h1>
+  <span id="status">Cargando modelo…</span>
+</header>
+<main>
+  <section>
+    <h2>Petición</h2>
+    <div class="row">
+      <label for="example">Ejemplo:</label>
+      <select id="example"></select>
+      <button class="secondary" id="load-example">Cargar</button>
+    </div>
+    <label for="state">Estado (texto libre o JSON)</label>
+    <textarea id="state" spellcheck="false"></textarea>
+    <div class="row">
+      <button id="run" disabled>Evaluar</button>
+      <span class="meta" id="latency"></span>
+    </div>
+    <h2>Resultados</h2>
+    <div id="results"><span class="meta">Pulsa «Evaluar».</span></div>
+  </section>
+  <section>
+    <h2>Normas y restricciones (preguntas tipadas, JSON)</h2>
+    <p class="meta" style="margin:0">
+      Tipos: <b>noul</b> → probabilidad sí/no · <b>choice</b> → una etiqueta entre <code>criteria</code> ·
+      <b>score</b> → nivel ordinal en <code>criteria</code> (lista). Cada clave es un id de pregunta.
+    </p>
+    <textarea id="questions" spellcheck="false"></textarea>
+    <span class="error" id="qerror"></span>
+  </section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

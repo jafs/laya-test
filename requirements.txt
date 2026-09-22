@@ -1,0 +1,5 @@
+# Instalar torch primero desde el índice CPU (ver setup.sh); aquí solo el pin.
+torch==2.14.0
+laya==0.3.6
+fastapi==0.141.1
+uvicorn==0.53.0
