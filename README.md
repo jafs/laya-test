@@ -4,7 +4,7 @@ Interfaz web mínima para probar [Laya](https://github.com/NandhaKishorM/laya), 
 
 - **Izquierda:** el estado a evaluar (texto libre o JSON) y los resultados.
 - **Derecha:** las normas y restricciones como preguntas tipadas en JSON.
-- Ejemplos precargados: filtro de spam (por defecto), triaje de soporte, moderación.
+- Ejemplos precargados: filtro de spam (por defecto), triaje de soporte, clasificación de noticias, moderación.
 
 ## Requisitos
 

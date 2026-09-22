@@ -50,6 +50,42 @@ const EXAMPLES = {
       pide_reembolso: { type: "noul", instructions: "¿Pide el usuario explícitamente un reembolso?" }
     }
   },
+  noticias: {
+    label: "Clasificación de noticias",
+    state: {
+      titular: "El Banco Central Europeo baja los tipos de interés un cuarto de punto hasta el 3,25 %",
+      cuerpo: "Fráncfort. El consejo de gobierno del BCE ha decidido este jueves recortar los tipos de interés por tercera vez en el año ante la moderación de la inflación en la eurozona, que se situó en el 1,8 % en septiembre. Los mercados descuentan un nuevo recorte en diciembre y el euro ha cedido terreno frente al dólar tras el anuncio."
+    },
+    questions: {
+      categoria: {
+        type: "choice",
+        instructions: "¿A qué sección o categoría pertenece esta noticia?",
+        criteria: {
+          politica: "gobiernos, elecciones, parlamentos, partidos",
+          economia: "mercados, bancos, empresas, empleo, inflación",
+          deportes: "competiciones, equipos, deportistas",
+          tecnologia: "software, internet, gadgets, inteligencia artificial",
+          ciencia: "investigación, salud, medio ambiente, espacio",
+          cultura: "cine, música, libros, arte, espectáculos",
+          sucesos: "accidentes, crímenes, tribunales, catástrofes"
+        }
+      },
+      ambito: {
+        type: "choice",
+        instructions: "¿Cuál es el ámbito geográfico de la noticia?",
+        criteria: { local: "una ciudad o región", nacional: "un país", internacional: "varios países u organismos supranacionales" }
+      },
+      relevancia: {
+        type: "score",
+        instructions: "¿Qué relevancia tiene la noticia para el público general?",
+        criteria: ["anecdótica", "interés moderado", "gran impacto"]
+      },
+      es_opinion: {
+        type: "noul",
+        instructions: "¿Es un artículo de opinión en lugar de una noticia informativa?"
+      }
+    }
+  },
   moderacion: {
     label: "Moderación de comentarios",
     state: "Eres un inútil y todo el mundo lo sabe, deberías desaparecer de este foro.",
